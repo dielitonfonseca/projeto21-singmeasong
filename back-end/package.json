@@ -8,7 +8,8 @@
     "build": "tsc src/app.ts",
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
-    "test": "dotenv -e .env.test prisma migrate dev && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i"
+    "test": "dotenv -e .env.test prisma migrate dev && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
+    "test:unit": "dotenv -e .env.test cross-env NODE_OPTIONS=--experimental-vm-modules jest -- -i --coverage --testPathPattern=tests/unit"
   },
   "keywords": [],
   "author": "",
