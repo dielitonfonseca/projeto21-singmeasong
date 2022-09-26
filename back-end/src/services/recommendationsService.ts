@@ -5,11 +5,8 @@ import { conflictError, notFoundError } from "../utils/errorUtils.js";
 export type CreateRecommendationData = Omit<Recommendation, "id" | "score">;
 
 async function insert(createRecommendationData: CreateRecommendationData) {
-  const existingRecommendation = await recommendationRepository.findByName(
-    createRecommendationData.name
-  );
-  if (existingRecommendation)
-    throw conflictError("Recommendations names must be unique");
+  const existingRecommendation = await recommendationRepository.findByName(createRecommendationData.name);
+  if (existingRecommendation) throw conflictError("Recommendations names must be unique");
 
   await recommendationRepository.create(createRecommendationData);
 }
@@ -23,10 +20,7 @@ async function upvote(id: number) {
 async function downvote(id: number) {
   await getByIdOrFail(id);
 
-  const updatedRecommendation = await recommendationRepository.updateScore(
-    id,
-    "decrement"
-  );
+  const updatedRecommendation = await recommendationRepository.updateScore(id, "decrement");
 
   if (updatedRecommendation.score < -5) {
     await recommendationRepository.remove(id);
@@ -61,6 +55,10 @@ async function getRandom() {
   return recommendations[randomIndex];
 }
 
+async function deleteAll() {
+  await recommendationRepository.removeAll();
+}
+
 async function getByScore(scoreFilter: "gt" | "lte") {
   const recommendations = await recommendationRepository.findAll({
     score: 10,
@@ -90,4 +88,5 @@ export const recommendationService = {
   get,
   getById: getByIdOrFail,
   getTop,
+  deleteAll,
 };

@@ -10,17 +10,17 @@ export default function CreateNewRecommendation({ onCreateNewRecommendation = ()
   const handleCreateRecommendation = () => {
     onCreateNewRecommendation({
       name,
-      link
+      link,
     });
     setLink("");
     setName("");
-  }
-  
+  };
+
   return (
     <Container>
-      <Input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} disabled={disabled} />
-      <Input type="text" placeholder="https://youtu.be/..." value={link} onChange={e => setLink(e.target.value)} disabled={disabled} />
-      <Button onClick={() => handleCreateRecommendation()} disabled={disabled}>
+      <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} disabled={disabled} />
+      <Input type="text" placeholder="https://youtu.be/..." value={link} onChange={(e) => setLink(e.target.value)} disabled={disabled} />
+      <Button id="createButtom" onClick={() => handleCreateRecommendation()} disabled={disabled}>
         <IoReturnUpForwardOutline size="24px" color="#fff" />
       </Button>
     </Container>
@@ -43,7 +43,7 @@ const Input = styled.input`
   font-family: "Lexend Deca", sans-serif;
 
   &:disabled {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &::placeholder {
@@ -61,6 +61,6 @@ const Button = styled.button`
   cursor: pointer;
 
   &:disabled {
-    opacity: .8;
+    opacity: 0.8;
   }
 `;
