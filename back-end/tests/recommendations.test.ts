@@ -2,7 +2,7 @@ import app from "../src/app.js";
 import supertest from "supertest";
 import { prisma } from "../src/database.js";
 import { faker } from "@faker-js/faker";
-import { createRecommendation, invalidRecommendation, validRecommendation } from "./factories/recommendationFactory.js";
+import { createRecommendation, invalidRecommendation } from "./factories/recommendationFactory.js";
 
 const agent = supertest(app);
 

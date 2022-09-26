@@ -1,11 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { prisma } from "../../src/database.js";
 
-export function validRecommendation() {
+export function validRecommendation(score?: number) {
   return {
     name: faker.music.songName(),
     youtubeLink: "https://www.youtube.com/watch?v=chwyjJbcs1Y",
-    score: +faker.random.numeric(),
+    score: score ? score : +faker.random.numeric(),
   };
 }
 
